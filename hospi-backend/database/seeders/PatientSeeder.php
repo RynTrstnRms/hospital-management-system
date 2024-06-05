@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB; // Import the DB facade
+use Illuminate\Support\Facades\DB;
 
 class PatientSeeder extends Seeder
 {
@@ -14,11 +14,11 @@ class PatientSeeder extends Seeder
      */
     public function run()
     {
-        DB::table("patients")->insert([
+        DB::table('patients')->insert([
             [
                 'first_name' => 'Allysa',
                 'last_name' => 'Samante',
-                'date_of_birth' => '2024-02-06', // Correct date format
+                'date_of_birth' => '2024-02-06',
                 'gender' => 'Female',
                 'address' => 'Binan',
                 'phone' => '0285728975',
@@ -47,19 +47,7 @@ class PatientSeeder extends Seeder
                 'email' => 'twinkleStar@gmail.com',
                 'emergency_contact' => '82345343454',
                 'medical_history' => 'diagnosed with cyst'
-            ],
-            [
-                'first_name' => 'Allysa',
-                'last_name' => 'Samante',
-                'date_of_birth' => '2024-02-06',
-                'gender' => 'Female',
-                'address' => 'Binan',
-                'phone' => '0285728975',
-                'email' => 'samanteallysa@gmail.com',
-                'emergency_contact' => '823698484',
-                'medical_history' => 'diagnosed with cyst'
-            ],
-        ]);        
-        
+            ]
+        ]);
     }
 }

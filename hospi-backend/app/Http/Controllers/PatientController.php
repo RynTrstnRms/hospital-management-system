@@ -32,17 +32,7 @@ class PatientController extends Controller
             'medical_history' => 'nullable|string',
         ]);
 
-        return Patient::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'date_of_birth' => $request->date_of_birth,
-            'gender' => $request->gender,
-            'address' => $request->address,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'emergency_contact' => $request->emergency_contact,
-            'medical_history' => $request->medical_history,
-        ]);
+        return Patient::create($request->all());
     }
 
     public function update(Request $request, $id)

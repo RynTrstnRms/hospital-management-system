@@ -18,8 +18,6 @@ class Patient extends Model
         "phone",
         "email",
         "emergency_contact",
-        "medical_history",
-        "created_at",
-        "updated_at"
+        "medical_history"
     ];
 }
