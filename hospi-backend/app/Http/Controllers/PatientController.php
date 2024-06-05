@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Patient;
-use Illuminate\Support\Facades\Hash;
 
 class PatientController extends Controller
 {
