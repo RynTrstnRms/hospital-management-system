@@ -41,4 +41,3 @@ class MedicalRecordController extends Controller
         return response()->json(['message' => 'Medical record deleted successfully']);
     }
 }
-
