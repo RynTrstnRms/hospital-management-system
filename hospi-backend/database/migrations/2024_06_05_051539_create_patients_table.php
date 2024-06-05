@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreatePatientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,13 +19,12 @@ return new class extends Migration
             $table->string('last_name');
             $table->date('date_of_birth');
             $table->string('gender');
-            $table->varchar('address');
-            $table->interger('phone');
-            $table->varchar('email');
-            $table->integer('emergency_contact');
-            $table->string('medical_history');
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('email')->nullable();
+            $table->string('emergency_contact')->nullable();
+            $table->text('medical_history')->nullable();
+            $table->timestamps(); // This line will create `created_at` and `updated_at` columns automatically
         });
     }
 
@@ -38,4 +37,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('patients');
     }
-};
+}
