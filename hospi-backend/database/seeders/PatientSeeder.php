@@ -10,7 +10,7 @@ class PatientSeeder extends Seeder
     
     public function run(): void
     {
-        DB::table("patient")->insert([
+        DB::table("patients")->insert([
             [
                 'first_name' => 'Allysa',
                 'last_name' => 'Samante',
