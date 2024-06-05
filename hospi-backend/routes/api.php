@@ -17,4 +17,4 @@ use App\Http\Controllers\PatientController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-oute::get('/patients', [PatientController::class, 'index'])->name('patients.index');
+Route::get('/patients', [PatientController::class, 'index'])->name('patients.index');
