@@ -2,42 +2,71 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Medical_Record;
 use Illuminate\Http\Request;
-use App\Models\MedicalRecord;
 
 class MedicalRecordController extends Controller
 {
     public function index()
     {
-        return MedicalRecord::all();
+        $medicalRecords = Medical_Record::all();
+        return response()->json($medicalRecords);
     }
 
     public function show($id)
     {
-        return MedicalRecord::find($id);
+        $medicalRecord = Medical_Record::findOrFail($id);
+        return response()->json($medicalRecord);
+    }
+
+    public function showDoctor($doctorId)
+    {
+        $medicalRecord = Medical_Record::where('doctor_id', $doctorId)->get();
+        return response()->json($medicalRecord);
+    }
+
+    public function showPatients($doctorId)
+    {
+        $medicalRecord = Medical_Record::where('patient_id', $doctorId)->get();
+        return response()->json($medicalRecord);
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'patient_id' => 'required|exists:patients,id',
-            'doctor_id' => 'required|exists:doctors,id',
-            'description' => 'required|string',
+        $validatedData = $request->validate([
+            'patient_id' => 'required',
+            'doctor_id' => 'required',
+            'visit_date' => 'required|date',
+            'diagnosis' => 'required',
+            'treatment' => 'required',
+            'notes' => 'nullable',
         ]);
 
-        return MedicalRecord::create($request->all());
+        $medicalRecord = Medical_Record::create($validatedData);
+
+        return response()->json(['message' => 'Medical Record added successfully', 'medical_record' => $medicalRecord], 201);
     }
 
     public function update(Request $request, $id)
     {
-        $medicalRecord = MedicalRecord::findOrFail($id);
-        $medicalRecord->update($request->all());
-        return $medicalRecord;
+        $medicalRecord = Medical_Record::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'visit_date' => 'required|date',
+            'diagnosis' => 'required',
+            'treatment' => 'required',
+            'notes' => 'nullable',
+        ]);
+
+        $medicalRecord->update($validatedData);
+
+        return response()->json(['message' => 'Medical Record updated successfully', 'medical_record' => $medicalRecord]);
     }
 
     public function destroy($id)
     {
-        MedicalRecord::find($id)->delete();
-        return response()->json(['message' => 'Medical record deleted successfully']);
+        $medicalRecord = Medical_Record::findOrFail($id);
+        $medicalRecord->delete();
+        return response()->json(['message' => 'Medical Record removed successfully']);
     }
 }
